@@ -4,14 +4,15 @@ public class Search {
         int[] sortedArr = new int[] { 1, 2, 3, 4, 5 };
         boolean[] buildingFloors = new boolean[] { true, true };
 
-        // System.out.println(linearSearch(arr, 24));
+        System.out.println(linearSearch(arr, 24));
 
-        // System.out.println(binarySearch(sortedArr, 0));
+        System.out.println(binarySearch(sortedArr, 0));
 
-        // System.out.println(binarySearchRecursive(sortedArr, 0, 0, sortedArr.length - 1));
+        System.out.println(binarySearchRecursive(sortedArr, 0, 0, sortedArr.length - 1));
 
-        // System.out.println(twoCrystalBalls(buildingFloors));
-        System.out.println(twoCrystalBallsSqrt(buildingFloors));
+        System.out.println(twoCrystalBalls(buildingFloors));
+        
+	    System.out.println(twoCrystalBallsSqrt(buildingFloors));
     }
 
     // Time Complexity: O(n)
