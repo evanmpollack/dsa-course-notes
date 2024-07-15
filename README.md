@@ -4,3 +4,9 @@
 ### Overview
 This folder is dedicated to exercises related to the course. Each folder represents a specific DS or A that has
 associated exercises (i.e. implementations, problems, etc).
+
+### Topics Covered
+
+    1. Search
+    2. Sort
+    3. LinkedList
