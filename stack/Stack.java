@@ -39,12 +39,12 @@ public class Stack {
             if (head == null) {
                 throw new NoSuchElementException("Cannot pop an empty stack");
             }
-            Node<T> next = head.next;
-            T data = head.data;
+            Node<T> head = this.head;
+            // setting head.next to null before setting this.head to next modifies the original reference and causes NPE on next deque
+            this.head = this.head.next;
             head.next = null;
-            head = next;
             size--;
-            return data;
+            return head.data;
         }
 
         T peek() {
