@@ -8,6 +8,11 @@ public class Queue {
         Node(T data) {
             this.data = data;
         }
+
+        @Override
+        public String toString() {
+            return String.valueOf(data);
+        }
     }
 
     // Personal Implementation
@@ -33,17 +38,34 @@ public class Queue {
             size++;
         }
 
-        T dequeue() {
+        T deque() {
             if (head == null) {
-                throw new NoSuchElementException("Cannot dequeue an empty queue");
+                throw new NoSuchElementException("Cannot deque an empty queue");
             }
             Node<T> next = head.next;
             T data = head.data;
             head.next = null;
             head = next;
-            tail = (head != null) ? tail : null; 
+            // Not technically needed.
+            // Formal reset of tail pointer, otherwise will be reset next enqueue if head is null
+            tail = (head != null) ? tail : null;
             size--;
             return data;
+        }
+
+        // My implementation was slightly different than in class
+        T inClassDeque() {
+            if (head == null) {
+                throw new NoSuchElementException("Cannot deque from empty queue");
+            }
+            // By storing a reference to the current head instead of next, we can avoid creating a data variable
+            Node<T> head = this.head;
+            // setting head.next to null before setting this.head to next modifies the original reference and causes NPE on next deque
+            this.head = this.head.next;
+            head.next = null;
+            tail = (this.head != null) ? tail : null;
+            size--;
+            return head.data;
         }
 
         T peek() {
@@ -73,7 +95,7 @@ public class Queue {
         System.out.println(myQueue.size());
 
         try {
-            myQueue.dequeue();
+            myQueue.deque();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -92,8 +114,10 @@ public class Queue {
         }
 
         for (int i=0; i<nums.length; i++) {
-            System.out.println(myQueue.dequeue());
+            System.out.println(myQueue.inClassDeque());
             System.out.println(myQueue);
         }
+
+        System.out.println(myQueue.tail);
     }
 }
