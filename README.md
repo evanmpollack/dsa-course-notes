@@ -10,3 +10,5 @@ associated exercises (i.e. implementations, problems, etc).
     1. Search
     2. Sort
     3. LinkedList
+    4. Queue
+    5. Stack
