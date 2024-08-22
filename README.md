@@ -12,3 +12,4 @@ associated exercises (i.e. implementations, problems, etc).
     3. LinkedList
     4. Queue
     5. Stack
+    6. Tree
