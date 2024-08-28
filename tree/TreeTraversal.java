@@ -1,7 +1,9 @@
 package tree;
 
 import java.util.List;
+import java.util.Queue;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class TreeTraversal {
     static class TreeNode<T> {
@@ -14,6 +16,7 @@ public class TreeTraversal {
         }
     }
 
+    // Depth
     static <T> void preOrder(TreeNode<T> root, List<T> target) {
         if (root == null) {
             return;
@@ -24,6 +27,7 @@ public class TreeTraversal {
         preOrder(root.right, target);
     }
 
+    // Depth
     static <T> void inOrder(TreeNode<T> root, List<T> target) {
         if (root == null) {
             return;
@@ -34,6 +38,7 @@ public class TreeTraversal {
         inOrder(root.right, target);
     }
 
+    // Depth
     static <T> void postOrder(TreeNode<T> root, List<T> target) {
         if (root == null) {
             return;
@@ -44,10 +49,67 @@ public class TreeTraversal {
         target.add(root.data);
     }
 
+    // Breadth
+    static <T> void levelOrder(TreeNode<T> root, List<T> target) {
+        Queue<TreeNode<T>> queue = new LinkedList<>();
+
+        if (root == null) {
+            return;
+        } else {
+            queue.add(root);
+        }
+
+        while (!queue.isEmpty()) {
+            TreeNode<T> curr = queue.remove();
+            
+            if (curr.left != null) {
+                queue.add(curr.left);
+            }
+
+            if (curr.right != null) {
+                queue.add(curr.right);
+            }
+
+            target.add(curr.data);
+        }
+    }
+
+    static <T> boolean bfs(TreeNode<T> root, T needle) {
+        Queue<TreeNode<T>> queue = new LinkedList<>();
+        boolean found = false;
+
+        if (root == null) {
+            return found;
+        } else {
+            queue.add(root);
+        }
+
+        while (!queue.isEmpty()) {
+            TreeNode<T> curr = queue.remove();
+            
+            // .equals because we are working with boxed types in generics
+            if (curr.data.equals(needle)) {
+                found = true;
+                break;
+            }
+
+            if (curr.left != null) {
+                queue.add(curr.left);
+            }
+
+            if (curr.right != null) {
+                queue.add(curr.right);
+            }
+        }
+
+        return found;
+    }
+
     public static void main(String[] args) {
         List<Integer> preOrder = new ArrayList<>();
         List<Integer> inOrder = new ArrayList<>();
         List<Integer> postOrder = new ArrayList<>();
+        List<Integer> levelOrder = new ArrayList<>();
         
         // Root
         TreeNode<Integer> root = new TreeNode<>(1);
@@ -70,8 +132,11 @@ public class TreeTraversal {
         preOrder(root, preOrder);
         inOrder(root, inOrder);
         postOrder(root, postOrder);
+        levelOrder(root, levelOrder);
         System.out.println(preOrder);
         System.out.println(inOrder);
         System.out.println(postOrder);
+        System.out.println(levelOrder);
+        System.out.println(bfs(root, 16));
     }
 }
