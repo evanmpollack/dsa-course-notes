@@ -138,5 +138,19 @@ public class TreeTraversal {
         System.out.println(postOrder);
         System.out.println(levelOrder);
         System.out.println(bfs(root, 16));
+
+        BST<Integer> bst = new BST<>();
+        bst.insert(50);
+        bst.insert(20);
+        bst.insert(30);
+        bst.insert(60);
+        bst.insert(70);
+        bst.insert(80);
+        bst.insert(40);
+        System.out.println(bst);
+        System.out.println(bst.find(10));
+        System.out.println(bst.find(20));
+        bst.delete(50);
+        System.out.println(bst.find(50));
     }
 }
