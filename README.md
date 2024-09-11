@@ -13,3 +13,4 @@ associated exercises (i.e. implementations, problems, etc).
     4. Queue
     5. Stack
     6. Tree
+    7. Heap
