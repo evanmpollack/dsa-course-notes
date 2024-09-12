@@ -66,10 +66,10 @@ public class Heap<T extends Comparable<T>> {
     }
 
     private static <T extends Comparable<T>> void siftDown(ArrayList<T> heap, Comparator<T> comparator, int index) {
-        while ((2 * index) + 1 < heap.size()) {
-            int nextChild = (2 * index) + 1;
-            if ((2 * index) + 2 < heap.size() && compare(comparator, heap.get(nextChild), heap.get((2 * index) + 2)) > 0) {
-                nextChild = (2 * index) + 2;
+        while (leftChildIndex(index) < heap.size()) {
+            int nextChild = leftChildIndex(index);
+            if (rightChildIndex(index) < heap.size() && compare(comparator, heap.get(nextChild), heap.get(rightChildIndex(index))) > 0) {
+                nextChild = rightChildIndex(index);
             }
 
             if (compare(comparator, heap.get(nextChild), heap.get(index)) < 0) {
@@ -85,9 +85,9 @@ public class Heap<T extends Comparable<T>> {
 
     private static <T extends Comparable<T>> void siftUp(ArrayList<T> heap, Comparator<T> comparator) {
         int index = heap.size() - 1;
-        while ((index - 1) / 2 >= 0 && compare(comparator, heap.get(index), heap.get((index - 1) / 2)) < 0) {
-            swap(heap, index, (index - 1) / 2);
-            index = (index - 1) / 2;
+        while (parentIndex(index) >= 0 && compare(comparator, heap.get(index), heap.get(parentIndex(index))) < 0) {
+            swap(heap, index, parentIndex(index));
+            index = parentIndex(index);
         }
     }
 
@@ -101,8 +101,20 @@ public class Heap<T extends Comparable<T>> {
         return comparator == null ? a.compareTo(b) : comparator.compare(a, b);
     }
 
+    private static int parentIndex(int index) {
+        return (index - 1) / 2;
+    }
+
+    private static int leftChildIndex(int index) {
+        return 2 * index + 1;
+    }
+
+    private static int rightChildIndex(int index) {
+        return 2 * index + 2;
+    }
+
     public static void main(String[] args) {
-        Heap<Integer> minHeap = new Heap<>(Comparator.<Integer>naturalOrder().reversed());
+        Heap<Integer> minHeap = new Heap<>(Comparator.<Integer>naturalOrder());
         minHeap.push(1);
         System.out.println(minHeap);
         minHeap.push(50);
