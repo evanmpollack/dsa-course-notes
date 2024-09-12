@@ -14,3 +14,11 @@ associated exercises (i.e. implementations, problems, etc).
     5. Stack
     6. Tree
     7. Heap
+
+### Post-Course Practice Exercises
+    
+    1. Recursive Heap Operations
+    2. Heap Update
+    3. Heap Sort
+    4. Merge Sort
+    5. AVL Tree
