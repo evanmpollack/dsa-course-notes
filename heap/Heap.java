@@ -1,6 +1,7 @@
 package heap;
 
 import java.util.Comparator;
+import java.util.NoSuchElementException;
 import java.util.ArrayList;
 
 public class Heap<T extends Comparable<T>> {
@@ -24,12 +25,19 @@ public class Heap<T extends Comparable<T>> {
         this.comparator = comparator;
     }
 
+    public boolean isEmpty() {
+        return heap.size() == 0;
+    }
+
     public void push(T data) {
         heap.add(data);
         siftUp(heap, comparator);
     }
 
     public T pop() {
+        if (isEmpty()) {
+            throw new NoSuchElementException();
+        }
         int lastIndex = heap.size() - 1;
         swap(heap, 0, lastIndex);
         T data = heap.remove(lastIndex);
@@ -38,6 +46,9 @@ public class Heap<T extends Comparable<T>> {
     }
 
     public T peek() {
+        if (isEmpty()) {
+            throw new NoSuchElementException();
+        }
         return heap.get(0);
     }
 
@@ -108,8 +119,5 @@ public class Heap<T extends Comparable<T>> {
         System.out.println(minHeap.pop());
         System.out.println(minHeap.pop());
         System.out.println(minHeap.pop());
-        
-        // Fix NPE 
-        // System.out.println(minHeap.pop());
     }
 }
