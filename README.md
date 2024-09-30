@@ -14,6 +14,7 @@ associated exercises (i.e. implementations, problems, etc).
     5. Stack
     6. Tree
     7. Heap
+    8. Trie
 
 ### Post-Course Practice Exercises
     
