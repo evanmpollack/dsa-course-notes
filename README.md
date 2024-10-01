@@ -15,6 +15,8 @@ associated exercises (i.e. implementations, problems, etc).
     6. Tree
     7. Heap
     8. Trie
+    9. Graph
+    10. Map
 
 ### Post-Course Practice Exercises
     
@@ -23,3 +25,4 @@ associated exercises (i.e. implementations, problems, etc).
     3. Heap Sort
     4. Merge Sort
     5. AVL Tree
+    6. Common Graph Algorithms (MST, Bellman-Ford, Floyd-Warshall, etc)
