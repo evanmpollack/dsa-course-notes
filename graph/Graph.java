@@ -36,6 +36,17 @@ public class Graph {
             System.out.println("DFS Matrix (target=" + i + "): " + dfs(0, adjMatrix, new HashSet<>(), i));
             System.out.println("BFS Matrix (target=" + i + "): " + bfs(0, adjMatrix, i));
         }
+
+        bfsMatrixInClass(0, adjMatrix, 3);
+        Map<Integer, List<Integer>> adjListInClass = Map.ofEntries(
+            Map.entry(0, List.of(1, 4)),
+            Map.entry(1, List.of(2)),
+            Map.entry(2, List.of(3)),
+            Map.entry(3, List.of()),
+            Map.entry(4, List.of(2, 3))
+        );
+        dfsListInClass(0, adjListInClass, new boolean[adjListInClass.size()], new ArrayList<>(), 3);
+
     }
 
     // ---------------------------------------------------------------------------------------------------
@@ -221,4 +232,70 @@ public class Graph {
     // ---------------------------------------------------------------------------------------------------
 
     // In Class Implementations: 
+
+
+    // Goal: print path at end (path is depth-first)
+    private static void bfsMatrixInClass(int source, int[][] graph, int needle) {
+        if (needle >= graph.length || source >= graph.length || needle < 0 || source < 0) {
+            throw new IllegalArgumentException("Vertex must be in graph");
+        }
+        
+        boolean[] visited = new boolean[graph.length];
+        int[] prev = new int[graph.length];
+        // Fill array (one liner instead of for loop)
+        Arrays.fill(prev, 0, graph.length, -1);
+        Queue<Integer> queue = new LinkedList<>();
+
+        queue.add(source);
+        visited[source] = true;
+
+        while (!queue.isEmpty()) {
+            int curr = queue.remove();
+            
+            if (curr == needle) {
+                break;
+            }
+
+            for (int vertex = 0; vertex < graph[curr].length; vertex++) {
+                if (graph[curr][vertex] != 0 && !visited[vertex]) {
+                    visited[vertex] = true;
+                    prev[vertex] = curr;
+                    queue.add(vertex);
+                }
+            }
+        }
+
+        // // If you can guaratee that needle < num verticies (graph.length), then you can walk up the previous array just as you would a linked list
+        // // This is with each iteration, the value stored at the current key points to it's parent. This is very similar to walking up a heap.
+
+        int curr = needle;
+        // Go until there are no more parent
+        while (prev[curr] != -1) {
+            System.out.println(curr);
+            curr = prev[curr];
+        }
+        // Source will always be -1 in the previous array because it doesn't have a parent. 
+        // Therefore, we have to append the source to the path
+        System.out.println(source);
+    }
+
+
+    private static void dfsListInClass(int source, Map<Integer, List<Integer>> graph, boolean[] visited, ArrayList<Integer> path, int needle) {
+        if (visited[source]) {
+            return;
+        }
+
+        visited[source] = true;
+
+        if (source == needle) {
+            System.out.println(path);
+            return;
+        }
+
+        path.add(source);
+        for (int vertex : graph.get(source)) {
+            dfsListInClass(vertex, graph, visited, path, needle);
+        }
+        path.removeLast();
+    }
 }
