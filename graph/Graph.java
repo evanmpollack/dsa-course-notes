@@ -47,6 +47,40 @@ public class Graph {
         );
         dfsListInClass(0, adjListInClass, new boolean[adjListInClass.size()], new ArrayList<>(), 3);
 
+
+        // Weighted Graph Class
+        // Based on: https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.geeksforgeeks.org%2Fdijkstras-shortest-path-algorithm-greedy-algo-7%2F&psig=AOvVaw0zXoSpz8JN_go00LgNgJaB&ust=1729020180239000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCOjh7p7MjokDFQAAAAAdAAAAABAE
+        BidirectionalNonNegativeWeightedGraph<Integer> bdnnwg = new BidirectionalNonNegativeWeightedGraph<>();
+        for (int i = 0; i < 9; i++) {
+            bdnnwg.addVertex(i);
+        }
+
+        bdnnwg.addEdge(0, 1, 4);
+        bdnnwg.addEdge(0, 7, 8);
+
+        bdnnwg.addEdge(1, 2, 8);
+        bdnnwg.addEdge(1, 7, 11);
+
+        bdnnwg.addEdge(2, 3, 7);
+        bdnnwg.addEdge(2, 5, 4);
+        bdnnwg.addEdge(2, 8, 2);
+
+        bdnnwg.addEdge(3, 4, 9);
+        bdnnwg.addEdge(3, 5, 14);
+        
+        bdnnwg.addEdge(5, 6, 2);
+        
+        bdnnwg.addEdge(6, 7, 1);
+        bdnnwg.addEdge(6, 8, 6);
+
+        bdnnwg.addEdge(7, 8, 7);
+
+        System.out.println(bdnnwg.dfs(5, 9));
+        System.out.println(bdnnwg.dfs(5, 8));
+        System.out.println(bdnnwg.bfs(5, 9));
+        System.out.println(bdnnwg.bfs(5, 8));
+
+        System.out.println(bdnnwg.shortestPath(0, 8).toString());
     }
 
     // ---------------------------------------------------------------------------------------------------
